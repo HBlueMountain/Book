@@ -1,0 +1,17 @@
+  /**
+     * 请求参数的格式是:name=value&name=value
+     * action=register&username=admin&password=admin&repwd=admin&email=admin%40qq.com&code=abcde
+     * [底层原理分析]
+     * 把所有请求的参数封装为 map 返回
+     *
+     */
+    Map<String, String[]> parameterMap = request.getParameterMap();
+    // 通过 增强for遍历
+//        for (String key : parameterMap.keySet()) {
+//            System.out.println( key + " = " + Arrays.asList(parameterMap.get(key)));
+//        }
+    // Entry 是 Map 集合的一个内部类,它是 map 中的每一个键值对
+    // 通过 entry 遍历
+    for (Map.Entry<String, String[] > entry : parameterMap.entrySet()){
+        System.out.println( entry.getKey() + " = " + Arrays.asList(entry.getValue() ));
+    }
