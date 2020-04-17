@@ -1,6 +1,7 @@
 package com.book.service;
 
 import com.book.pojo.Book;
+import com.book.pojo.Page;
 
 import java.util.List;
 
@@ -39,4 +40,12 @@ public interface BookService {
      * @return
      */
     public List<Book> queryBooks();
+
+    /**
+     * 分页
+     * @param pageNo    当前页码
+     * @param pageSize  当前页显示数量
+     * @return
+     */
+    Page<Book> page(int pageNo, int pageSize);
 }

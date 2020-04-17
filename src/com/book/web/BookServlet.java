@@ -1,6 +1,7 @@
 package com.book.web;
 
 import com.book.pojo.Book;
+import com.book.pojo.Page;
 import com.book.service.BookService;
 import com.book.service.impl.BookServiceImpl;
 import com.book.utils.WebUtils;
@@ -21,6 +22,25 @@ import java.util.List;
 public class BookServlet extends BaseServlet {
 
     private BookService bookService = new BookServiceImpl();
+
+    /**
+     * 处里分页功能
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 1.获取请求的参数 pageNo 和 pageSize
+        int pageNo = WebUtils.parseInt(request.getParameter("pageNo"), 1);  // 默认是第一页
+        int pageSize = WebUtils.parseInt(request.getParameter("pageSize"), Page.PAGE_SIZE);
+        // 2.顶用 BookService.page(pageNo, pageSize) : Page 对象
+        Page<Book> page = bookService.page(pageNo, pageSize);
+        // 3.保存 Page 对象到 request 域中
+        request.setAttribute("page", page);
+        // 4.请求转发到 pages/manager/book_manager.jsp 页面中
+        request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
+    }
 
     /**
      * 添加图书
