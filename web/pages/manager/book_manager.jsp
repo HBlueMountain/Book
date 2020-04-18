@@ -24,6 +24,16 @@ Created by YongXin Xue on 2020/04/15 10:09
 				return confirm("你确定要删除《" + text + "》图书吗?")
 			});
 		});
+		$(function () {
+			//跳到指定的页码
+			$("#searchPageBtn").click(function () {
+				var pageNo = $("#pn_input").val();
+				//JavaScript提供了一个 location 地址栏对象
+				//它有一个属性 href 它可以获取浏览器地址栏中的地址
+				//href 属性可读可写
+				location.href = "http://localhost:8080/book/manager/books?action=page&pageNo=7";
+			});
+		});
 	</script>
 </head>
 <body>
@@ -43,7 +53,7 @@ Created by YongXin Xue on 2020/04/15 10:09
 				<td>库存</td>
 				<td colspan="2">操作</td>
 			</tr>
-			<c:forEach items="${ requestScope.books }" var="book">
+			<c:forEach items="${ requestScope.page.items }" var="book">
 				<tr>
 					<td>${ book.name }</td>
 					<td>${ book.price }</td>
@@ -64,6 +74,28 @@ Created by YongXin Xue on 2020/04/15 10:09
 				<td><a href="pages/manager/book_edit.jsp">添加图书</a></td>
 			</tr>
 		</table>
+		<br>
+
+		<%-- 分页条的开始--%>
+		<div id="page_nav">
+			<%-- 大于首页才显示 --%>
+			<c:if test="${ requestScope.page.pageNo > 1}">
+				<a href="manager/books?action=page&pageNo=1">首页</a>
+				<a href="manager/books?action=page&pageNo=${ requestScope.page.pageNo-1 }">上一页</a>
+			</c:if>
+			<a href="#">3</a>
+			【${ requestScope.page.pageNo }】
+			<a href="#">5</a>
+			<%-- 如果是最后一页则不显示 --%>
+			<c:if test="${ requestScope.page.pageNo < requestScope.page.pageToTal }">
+				<a href="manager/books?action=page&pageNo=${ requestScope.page.pageNo+1 }">下一页</a>
+				<a href="manager/books?action=page&pageNo=${ requestScope.page.pageToTal }">末页</a>
+			</c:if>
+			共 ${ requestScope.page.pageToTal } 页，${ requestScope.page.getPageToTalCount } 条记录 到第
+				<input value="4" name="pn" id="pn_input"/>页
+				<input id="searchPageBtn" type="button" value="确定">
+		</div>
+		<%-- 分页条结束 --%>
 	</div>
 	<%-- 静态包含 版权页脚--%>
 	<%@ include file="/pages/common/footer.jsp"%>

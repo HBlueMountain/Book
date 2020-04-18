@@ -34,7 +34,7 @@ public class BookServlet extends BaseServlet {
         // 1.获取请求的参数 pageNo 和 pageSize
         int pageNo = WebUtils.parseInt(request.getParameter("pageNo"), 1);  // 默认是第一页
         int pageSize = WebUtils.parseInt(request.getParameter("pageSize"), Page.PAGE_SIZE);
-        // 2.顶用 BookService.page(pageNo, pageSize) : Page 对象
+        // 2.调用 BookService.page(pageNo, pageSize) : Page 对象
         Page<Book> page = bookService.page(pageNo, pageSize);
         // 3.保存 Page 对象到 request 域中
         request.setAttribute("page", page);
