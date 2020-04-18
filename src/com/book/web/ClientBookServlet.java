@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "ClientBookServlet", urlPatterns = "/client/books")
 public class ClientBookServlet extends BaseServlet {
     protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("求分页数据保存到 Request 域中,最后转发到client/index,jsp 页面中");
         request.getRequestDispatcher("/pages/client/index.jsp").forward(request, response);
     }
 
