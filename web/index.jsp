@@ -9,6 +9,11 @@ Created by YongXin Xue on 2020/04/15 10:09
     <title>书城首页</title>
     <%-- 使用静态包含 base标签 css样式 jQuery文件 --%>
     <%@ include file="/pages/common/header.jsp" %>
+    <style type="text/css">
+        a{
+            text-decoration:none;
+        }
+    </style>
 </head>
 <body>
 
@@ -170,7 +175,7 @@ Created by YongXin Xue on 2020/04/15 10:09
         <a href="#">5</a>
         <a href="#">下一页</a>
         <a href="#">末页</a>
-        共10页，30条记录 到第<input value="4" name="pn" id="pn_input"/>页
+        共10页，30条记录 到第 <input value="4" name="pn" id="pn_input"/> 页
         <input type="button" value="确定">
     </div>
 

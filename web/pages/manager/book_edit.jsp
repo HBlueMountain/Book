@@ -36,6 +36,7 @@ Created by YongXin Xue on 2020/04/15 10:09
     <form action="manager/books" method="get">
         <input type="hidden" name="action" value="${ empty param.id ? "add" : "update"}"/>
         <input type="hidden" name="id" value="${ requestScope.book.id }"/>
+        <input type="hidden" name="pageNo" value="${ param.pageNo }"/>
         <table>
             <tr>
                 <td>名称</td>

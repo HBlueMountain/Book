@@ -44,8 +44,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Page<Book> page(int pageNo, int pageSize) {
         Page<Book> page = new Page<>();
-        // 1.设置当前页码
-        page.setPageNo(pageNo);
+
         // 2.设置每页显示的数量
         page.setPageSize(pageSize);
 
@@ -55,12 +54,16 @@ public class BookServiceImpl implements BookService {
         page.setGetPageToTalCount(pageTotalCount);
 
         // 5.求总页码
-        Integer pageTotal = pageTotalCount / pageSize;
+        Integer pageToTal = pageTotalCount / pageSize;
         if(pageTotalCount % pageSize > 0){
-            pageTotal++;
+            pageToTal++;
         }
         // 6.设置总页码
-        page.setPageToTal(pageTotal);
+        page.setPageToTal(pageToTal);
+
+        // 1.设置当前页码
+        page.setPageNo(pageNo);
+
         // 7.求当前页数据的开始索引 ==> [当前页码减一乘以每页数量]
         int begin = (page.getPageNo() - 1) * pageSize;
         // 7.求当前页数据

@@ -59,7 +59,7 @@ public class BookServlet extends BaseServlet {
         // 3.跳转到图书列表页面
 //        request.getRequestDispatcher("/manager/books?action=list").forward(request, response);  //有bug会重复提交表单
         // 这里使用重定向
-        response.sendRedirect(request.getContextPath() + "/manager/books?action=list");
+        response.sendRedirect(request.getContextPath() + "/manager/books?action=page&pageNo=" + Integer.MAX_VALUE);
     }
 
     /**
@@ -76,7 +76,7 @@ public class BookServlet extends BaseServlet {
         // 2.调用 BookServlet.deleteBookById(id) 删除图书
         bookService.deleteBookById(id);
         // 3.重定向到图书列表页面
-        response.sendRedirect(request.getContextPath() + "/manager/books?action=list");
+        response.sendRedirect(request.getContextPath() + "/manager/books?action=page&pageNo=" + request.getParameter("pageNo"));
     }
 
     /**
@@ -93,7 +93,7 @@ public class BookServlet extends BaseServlet {
         // 2.调用BookService.updateBook(book) 修改图书
         bookService.updateBook(book);
         // 3.重定向到图书列表页
-        response.sendRedirect(request.getContextPath() + "/manager/books?action=list");
+        response.sendRedirect(request.getContextPath() + "/manager/books?action=page&pageNo=" + request.getParameter("pageNo"));
 
     }
 
