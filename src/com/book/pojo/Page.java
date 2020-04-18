@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Page<T> {
 
-    public static final Integer PAGE_SIZE = 4;
+    public static final Integer PAGE_SIZE = 2;
 
     private Integer pageNo;     //当前页码
     private Integer pageToTal;  //总页码

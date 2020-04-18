@@ -43,31 +43,31 @@ Created by YongXin Xue on 2020/04/15 10:09
             </div>
         </div>
         <%-- 图书遍历的开始 --%>
-        <c:forEach items="${ requestScope.page.items}" var="book">
+        <c:forEach items="${requestScope.page.items}" var="book">
             <div class="b_list">
                 <div class="img_div">
-                    <img class="book_img" alt="" src="${ book.imgPath }"/>
+                    <img class="book_img" alt="" src="${book.imgPath}"/>
                 </div>
                 <div class="book_info">
                     <div class="book_name">
                         <span class="sp1">书名:</span>
-                        <span class="sp2">${ book.name }</span>
+                        <span class="sp2">${book.name}</span>
                     </div>
                     <div class="book_author">
                         <span class="sp1">作者:</span>
-                        <span class="sp2">${ book.author }</span>
+                        <span class="sp2">${book.author}</span>
                     </div>
                     <div class="book_price">
                         <span class="sp1">价格:</span>
-                        <span class="sp2">￥${ book.price }</span>
+                        <span class="sp2">￥${book.price}</span>
                     </div>
                     <div class="book_sales">
                         <span class="sp1">销量:</span>
-                        <span class="sp2">${ book.sales }</span>
+                        <span class="sp2">${book.sales}</span>
                     </div>
                     <div class="book_amount">
                         <span class="sp1">库存:</span>
-                        <span class="sp2">${ book.stock }</span>
+                        <span class="sp2">${book.stock}</span>
                     </div>
                     <div class="book_add">
                         <button>加入购物车</button>
@@ -77,7 +77,6 @@ Created by YongXin Xue on 2020/04/15 10:09
         </c:forEach>
         <%-- 图书遍历的结束 --%>
     </div>
-
     <div id="page_nav">
         <a href="#">首页</a>
         <a href="#">上一页</a>
