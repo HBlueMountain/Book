@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
 Created by YongXin Xue on 2020/04/15 10:09
 --%>
@@ -41,129 +42,40 @@ Created by YongXin Xue on 2020/04/15 10:09
                 您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
             </div>
         </div>
-        <div class="b_list">
-            <div class="img_div">
-                <img class="book_img" alt="" src="static/img/default.jpg"/>
-            </div>
-            <div class="book_info">
-                <div class="book_name">
-                    <span class="sp1">书名:</span>
-                    <span class="sp2">时间简史</span>
+        <%-- 图书遍历的开始 --%>
+        <c:forEach items="${ requestScope.page.items}" var="book">
+            <div class="b_list">
+                <div class="img_div">
+                    <img class="book_img" alt="" src="${ book.imgPath }"/>
                 </div>
-                <div class="book_author">
-                    <span class="sp1">作者:</span>
-                    <span class="sp2">霍金</span>
-                </div>
-                <div class="book_price">
-                    <span class="sp1">价格:</span>
-                    <span class="sp2">￥30.00</span>
-                </div>
-                <div class="book_sales">
-                    <span class="sp1">销量:</span>
-                    <span class="sp2">230</span>
-                </div>
-                <div class="book_amount">
-                    <span class="sp1">库存:</span>
-                    <span class="sp2">1000</span>
-                </div>
-                <div class="book_add">
-                    <button>加入购物车</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="b_list">
-            <div class="img_div">
-                <img class="book_img" alt="" src="static/img/default.jpg"/>
-            </div>
-            <div class="book_info">
-                <div class="book_name">
-                    <span class="sp1">书名:</span>
-                    <span class="sp2">时间简史</span>
-                </div>
-                <div class="book_author">
-                    <span class="sp1">作者:</span>
-                    <span class="sp2">霍金</span>
-                </div>
-                <div class="book_price">
-                    <span class="sp1">价格:</span>
-                    <span class="sp2">￥30.00</span>
-                </div>
-                <div class="book_sales">
-                    <span class="sp1">销量:</span>
-                    <span class="sp2">230</span>
-                </div>
-                <div class="book_amount">
-                    <span class="sp1">库存:</span>
-                    <span class="sp2">1000</span>
-                </div>
-                <div class="book_add">
-                    <button>加入购物车</button>
+                <div class="book_info">
+                    <div class="book_name">
+                        <span class="sp1">书名:</span>
+                        <span class="sp2">${ book.name }</span>
+                    </div>
+                    <div class="book_author">
+                        <span class="sp1">作者:</span>
+                        <span class="sp2">${ book.author }</span>
+                    </div>
+                    <div class="book_price">
+                        <span class="sp1">价格:</span>
+                        <span class="sp2">￥${ book.price }</span>
+                    </div>
+                    <div class="book_sales">
+                        <span class="sp1">销量:</span>
+                        <span class="sp2">${ book.sales }</span>
+                    </div>
+                    <div class="book_amount">
+                        <span class="sp1">库存:</span>
+                        <span class="sp2">${ book.stock }</span>
+                    </div>
+                    <div class="book_add">
+                        <button>加入购物车</button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="b_list">
-            <div class="img_div">
-                <img class="book_img" alt="" src="static/img/default.jpg"/>
-            </div>
-            <div class="book_info">
-                <div class="book_name">
-                    <span class="sp1">书名:</span>
-                    <span class="sp2">时间简史</span>
-                </div>
-                <div class="book_author">
-                    <span class="sp1">作者:</span>
-                    <span class="sp2">霍金</span>
-                </div>
-                <div class="book_price">
-                    <span class="sp1">价格:</span>
-                    <span class="sp2">￥30.00</span>
-                </div>
-                <div class="book_sales">
-                    <span class="sp1">销量:</span>
-                    <span class="sp2">230</span>
-                </div>
-                <div class="book_amount">
-                    <span class="sp1">库存:</span>
-                    <span class="sp2">1000</span>
-                </div>
-                <div class="book_add">
-                    <button>加入购物车</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="b_list">
-            <div class="img_div">
-                <img class="book_img" alt="" src="static/img/default.jpg"/>
-            </div>
-            <div class="book_info">
-                <div class="book_name">
-                    <span class="sp1">书名:</span>
-                    <span class="sp2">时间简史</span>
-                </div>
-                <div class="book_author">
-                    <span class="sp1">作者:</span>
-                    <span class="sp2">霍金</span>
-                </div>
-                <div class="book_price">
-                    <span class="sp1">价格:</span>
-                    <span class="sp2">￥30.00</span>
-                </div>
-                <div class="book_sales">
-                    <span class="sp1">销量:</span>
-                    <span class="sp2">230</span>
-                </div>
-                <div class="book_amount">
-                    <span class="sp1">库存:</span>
-                    <span class="sp2">1000</span>
-                </div>
-                <div class="book_add">
-                    <button>加入购物车</button>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
+        <%-- 图书遍历的结束 --%>
     </div>
 
     <div id="page_nav">
@@ -177,7 +89,6 @@ Created by YongXin Xue on 2020/04/15 10:09
         共10页，30条记录 到第 <input value="4" name="pn" id="pn_input"/> 页
         <input type="button" value="确定">
     </div>
-
 </div>
 <%-- 静态包含 版权页脚--%>
 <%@ include file="/pages/common/footer.jsp" %>
