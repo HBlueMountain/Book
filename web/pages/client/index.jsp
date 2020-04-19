@@ -2,6 +2,7 @@
 <%--
 Created by YongXin Xue on 2020/04/15 10:09
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -30,9 +31,10 @@ Created by YongXin Xue on 2020/04/15 10:09
 <div id="main">
     <div id="book">
         <div class="book_cond">
-            <form action="" method="get">
-                价格：<input id="min" type="text" name="min" value=""> 元 -
-                <input id="max" type="text" name="max" value=""> 元
+            <form action="client/books" method="get">
+                <input type="hidden" name="action" value="pageByPrice"/>
+                价格：<input id="min" type="text" name="min" value="${param.min}"> 元 -
+                <input id="max" type="text" name="max" value="${param.max}"> 元
                 <input type="submit" value="查询"/>
             </form>
         </div>
@@ -43,7 +45,7 @@ Created by YongXin Xue on 2020/04/15 10:09
             </div>
         </div>
         <%-- 图书遍历的开始 --%>
-        <c:forEach items="${requestScope.page.items}" var="book">
+        <c:forEach items ="${requestScope.page.items}" var="book">
             <div class="b_list">
                 <div class="img_div">
                     <img class="book_img" alt="" src="${book.imgPath}"/>
@@ -77,17 +79,8 @@ Created by YongXin Xue on 2020/04/15 10:09
         </c:forEach>
         <%-- 图书遍历的结束 --%>
     </div>
-    <div id="page_nav">
-        <a href="#">首页</a>
-        <a href="#">上一页</a>
-        <a href="#">3</a>
-        【4】
-        <a href="#">5</a>
-        <a href="#">下一页</a>
-        <a href="#">末页</a>
-        共10页，30条记录 到第 <input value="4" name="pn" id="pn_input"/> 页
-        <input type="button" value="确定">
-    </div>
+    <%-- 静态包含分页条 --%>
+    <%@ include file="/pages/common/page_nav.jsp"%>
 </div>
 <%-- 静态包含 版权页脚--%>
 <%@ include file="/pages/common/footer.jsp" %>
