@@ -4,6 +4,7 @@ import com.book.pojo.User;
 import com.book.service.UserService;
 import com.book.service.impl.UserServiceImpl;
 import com.book.utils.WebUtils;
+import com.google.code.kaptcha.Constants;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.jasper.tagplugins.jstl.core.If;
@@ -37,6 +38,10 @@ public class UserServlet extends BaseServlet {
      */
     protected void register(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
         System.out.println("可以注册了!!!!");
+        // 获取Session中的验证码
+        String authCode = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        // 删除 Session 中的验证码
+        request.getSession().removeAttribute(Constants.KAPTCHA_SESSION_KEY);
         // 1.获取表单信息
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -48,7 +53,7 @@ public class UserServlet extends BaseServlet {
 
         //假设验证码是 : [ABCDE]
         // 2.检查验证码是否正确
-        if ("ABCDE".equalsIgnoreCase(code)){
+        if (authCode.equalsIgnoreCase(code)){
 
             // 3.检查用户名是否存在
             if (userService.existsUsername(username)){
@@ -97,6 +102,10 @@ public class UserServlet extends BaseServlet {
         if (loginUser != null){
             // 1.登录成功
             System.out.println("登录成功!!");
+
+            // 保存用户登录成功的信息到 Session 中
+            request.getSession().setAttribute("user", loginUser);
+
             request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request, response);
         }else {
 
@@ -109,5 +118,19 @@ public class UserServlet extends BaseServlet {
             // 跳回登录页面
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
         }
+    }
+
+    /**
+     * 注销
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //1 销毁Session( Session中保存的数据也一起被销毁.也就是用户登录的信息 )
+        request.getSession().invalidate(); // 马上销毁
+        //2 重定向到登录页面  或  网站首页
+        response.sendRedirect(request.getContextPath());
     }
 }

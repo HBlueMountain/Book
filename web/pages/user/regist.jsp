@@ -11,6 +11,14 @@ Created by YongXin Xue on 2020/04/15 10:09
     <%@ include file="/pages/common/header.jsp" %>
     <script type="text/javascript">
         $(function () {
+
+            // 给验证码图片绑定单击事件
+           $("#codeImg").click(function () {
+                // 在事件响应的function函数中有一个this对象.这个this对象是当前正在响应事件的dom对象
+                // img 标签的src 属性是图片的连接地址,src可读可写
+                this.src = "${basePath}kaptcha.jpg?d=" + Math.random();
+           });
+
             $("#sub_btn").click(function () {
                 // 验证用户名：必须由字母，数字下划线组成，并且长度为5到12位
                 // 1.获取用户名
@@ -127,8 +135,9 @@ Created by YongXin Xue on 2020/04/15 10:09
                         <br/>
                         <br/>
                         <label>验证码：</label>
-                        <input class="itxt" type="text" style="width: 150px;" id="code" name="code"/>
-                        <img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+                        <input class="itxt" type="text" style="width: 120px;" id="code" name="code" value=""/>
+                        <%--<img alt="" src="kaptcha.jpg" style="float: right; margin-right: 40px">--%>
+                        <img id="codeImg" alt="" src="kaptcha.jpg" style="position: absolute; top: 430px; left: 1150px; height: 40px; width: 100px;">
                         <br/>
                         <br/>
                         <input type="submit" value="注册" id="sub_btn"/>

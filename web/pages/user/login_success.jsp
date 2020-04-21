@@ -21,7 +21,7 @@ Created by YongXin Xue on 2020/04/15 10:09
 			<%@ include file="/pages/common/login_success_menu.jsp"%>
 		</div>
 		<div id="main">
-			<h1>欢迎回来 <a href="index.jsp">转到主页</a></h1>
+			<h1>欢迎回来 <a href="index.jsp">返回书城首页</a></h1>
 		</div>
 		<%-- 静态包含 版权页脚--%>
 		<%@ include file="/pages/common/footer.jsp"%>

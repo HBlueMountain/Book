@@ -38,27 +38,10 @@ Created by YongXin Xue on 2020/04/15 10:09
 				<td>2015.04.23</td>
 				<td>90.00</td>
 				<td>未发货</td>
-				<td><a href="#">查看详情</a></td>
-			</tr>	
-			
-			<tr>
-				<td>2015.04.20</td>
-				<td>20.00</td>
-				<td>已发货</td>
-				<td><a href="#">查看详情</a></td>
-			</tr>	
-			
-			<tr>
-				<td>2014.01.23</td>
-				<td>190.00</td>
-				<td>已完成</td>
-				<td><a href="#">查看详情</a></td>
-			</tr>		
+				<td><a style="text-decoration: none;" href="#">查看详情</a></td>
+			</tr>
 		</table>
-		
-	
 	</div>
-
 	<%-- 静态包含 版权页脚--%>
 	<%@ include file="/pages/common/footer.jsp"%>
 </body>

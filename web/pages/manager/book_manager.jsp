@@ -50,7 +50,7 @@ Created by YongXin Xue on 2020/04/15 10:09
         </tr>
         <c:forEach items="${ requestScope.page.items }" var="book">
             <tr>
-                <td colspan="2">${ book.name }</td>
+                <td colspan="2">《 ${ book.name } 》</td>
                 <td>${ book.price }</td>
                 <td>${ book.author }</td>
                 <td>${ book.sales }</td>
