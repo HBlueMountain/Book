@@ -15,3 +15,13 @@
     for (Map.Entry<String, String[] > entry : parameterMap.entrySet()){
         System.out.println( entry.getKey() + " = " + Arrays.asList(entry.getValue() ));
     }
+
+    // 7.修改图书的销量和库存
+                // 得到原来的商品信息
+                Book book = bookDao.queryBookById(cartItems.getId());
+                // 修改库存
+                book.setStock(book.getStock() - cartItems.getCount());
+                // 修改销量
+                book.setSales(book.getSales() - cartItems.getCount());
+                // 8.保存商品信息
+                bookDao.updateBook(book);

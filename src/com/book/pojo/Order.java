@@ -30,7 +30,7 @@ public class Order {
         return "Order{" +
                 "orderId='" + orderId + '\'' +
                 ", createTime=" + createTime +
-                ", price=" + totalPrice +
+                ", totalPrice=" + totalPrice +
                 ", status=" + status +
                 ", userId=" + userId +
                 '}';

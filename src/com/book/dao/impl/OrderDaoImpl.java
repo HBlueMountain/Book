@@ -13,22 +13,26 @@ import java.util.List;
 public class OrderDaoImpl extends BaseDao implements OrderDao {
     @Override
     public int saveOrder(Order order) {
-        String sql = "INSERT INTO `t_order`( `order_id`,`create_time`, `total_price`,`status`,`user_id`) VALUES (?,?,?,?,?) ;";
+        String sql = "INSERT INTO `t_order`( `order_id`,`create_time`, `total_price`,`status`,`user_id`) VALUES (?,?,?,?,?)";
         return update(sql, order.getOrderId(), order.getCreateTime(), order.getTotalPrice(), order.getStatus(), order.getUserId());
     }
 
     @Override
     public List<Order> queryAllOrders() {
-        return null;
+        String sql = "SELECT `order_id` orderId,`create_time` createTime, `total_price` totalPrice,`status`,`user_id` userId FROM `t_order`";
+        return queryForList(Order.class, sql);
     }
 
     @Override
     public List<Order> queryOrderByUserId(Integer userId) {
-        return null;
+        String sql = "SELECT `order_id` orderId,`create_time` createTime, `total_price` totalPrice,`status`,`user_id` userId " +
+                "FROM `t_order` WHERE user_id = ?";
+        return queryForList(Order.class, sql, userId);
     }
 
     @Override
     public int updateOrderByStatus(String orderId, Integer status) {
-        return 0;
+        String sql = "UPDATE t_order SET status = ? where order_id = ?";
+        return update(sql, status, orderId);
     }
 }

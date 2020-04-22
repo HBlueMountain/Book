@@ -21,10 +21,14 @@ public class OrderItemDaoTest {
 
     @Test
     public void saveOrderItem() {
-        orderItemDao.saveOrderItem(new OrderItem(null, "MySQL高级", 288, new BigDecimal(100), new BigDecimal(28800), "343462344234HDF"));
+        orderItemDao.saveOrderItem(new OrderItem(null, "手撕Spring", 288, new BigDecimal(100), new BigDecimal(28800), "20204210008CC"));
+        orderItemDao.saveOrderItem(new OrderItem(null, "Java高级编程", 288, new BigDecimal(200), new BigDecimal(20000), "20204210008CC"));
+        orderItemDao.saveOrderItem(new OrderItem(null, "手写Tomcat", 288, new BigDecimal(100), new BigDecimal(28800), "20204210008CC"));
+        orderItemDao.saveOrderItem(new OrderItem(null, "老韩手写二叉树", 288, new BigDecimal(100), new BigDecimal(28800), "20204210008CC"));
     }
 
     @Test
     public void queryOrderItemByOrderId() {
+        orderItemDao.queryOrderItemByOrderId("158755851477313").forEach(System.out::println);
     }
 }

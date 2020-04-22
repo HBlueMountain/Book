@@ -20,18 +20,24 @@ public class OrderDaoTest {
 
     @Test
     public void saveOrder() {
-        orderDao.saveOrder(new Order("343462344234HDF", new Date(), new BigDecimal(1111), 0, 1));
+        orderDao.saveOrder(new Order("20204210006CC", new Date(), new BigDecimal(1234), 0, 2));
+        orderDao.saveOrder(new Order("20204210004CC", new Date(), new BigDecimal(4000), 0, 1));
+        orderDao.saveOrder(new Order("20204210007CC", new Date(), new BigDecimal(4775), 0, 1));
+        orderDao.saveOrder(new Order("20204210008CC", new Date(), new BigDecimal(3455), 0, 2));
     }
 
     @Test
     public void queryAllOrders() {
+        orderDao.queryAllOrders().forEach(System.out::println);
     }
 
     @Test
     public void queryOrderByUserId() {
+        orderDao.queryOrderByUserId(2).forEach(System.out::println);
     }
 
     @Test
     public void updateOrderByStatus() {
+        orderDao.updateOrderByStatus("20204210006CC", 1);
     }
 }

@@ -64,7 +64,7 @@
 			<%-- 当购物车不为空就显示 --%>
 			<c:if test="${ not empty sessionScope.cart.items }">
 				<tr>
-					<td>商品名称</td>
+					<td style="width: 30%">商品名称</td>
 					<td>数量</td>
 					<td>单价</td>
 					<td>金额</td>
@@ -95,7 +95,7 @@
 				<span class="cart_span">购物车中共有<span class="b_count">${ sessionScope.cart.totalCount}</span>件商品</span>
 				<span class="cart_span">总金额<span class="b_price">${ sessionScope.cart.totalPrice}</span>元</span>
 				<span class="cart_span"><a id="clearCart" style="text-decoration: none;" href="cart?action=clear">清空购物车</a></span>
-				<span class="cart_span"><a style="text-decoration: none;" href="pages/cart/checkout.jsp">去结账</a></span>
+				<span class="cart_span"><a style="text-decoration: none;" href="order?action=cartOrder">去结账</a></span>
 			</div>
 		</c:if>
 	</div>
