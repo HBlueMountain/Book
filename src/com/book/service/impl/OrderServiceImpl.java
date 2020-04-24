@@ -8,6 +8,7 @@ import com.book.dao.impl.OrderDaoImpl;
 import com.book.dao.impl.OrderItemDaoImpl;
 import com.book.pojo.*;
 import com.book.service.OrderService;
+import com.book.test.ThreadLocalTest;
 
 import java.util.Date;
 import java.util.List;
@@ -24,12 +25,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public String createOrder(Cart cart, Integer userId) {
+        //测试当前线程是否同步
+        System.out.println("OrderServiceImpl 当前线程名是:" + Thread.currentThread().getName());
         // 1.订单号要确保唯一,简单的使用 订单号:[时间 + 用户编号]
         String orderId = System.currentTimeMillis() + "" + userId;
         // 2.创建订单对象
         Order order = new Order(orderId, new Date(), cart.getTotalPrice(), 0, userId);
         // 3.保存订单
         orderDao.saveOrder(order);
+
+        //int i = 9 / 0;    //测试事务的提交
 
         // 4.保存订单项
         // 遍历购物车中的商品项,生成订单项,并保存到数据库中

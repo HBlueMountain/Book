@@ -16,7 +16,7 @@ public class JDBCUtilsTest {
         for (int i = 0; i < 10; i++){
             Connection connection = JDBCUtils.getConnection();
             System.out.println(connection);
-            JdbcUtils.close(connection);
+//            JdbcUtils.close(connection);
         }
 
     }

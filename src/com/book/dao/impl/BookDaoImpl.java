@@ -14,6 +14,8 @@ public class BookDaoImpl extends BaseDao implements BookDao {
 
     @Override
     public int addBook(Book book) {
+        //测试当前线程是否同步
+        System.out.println("BookDaoImpl 当前线程名是:" + Thread.currentThread().getName());
         String sql = "INSERT INTO t_book (`name`, `author`, `price`, `sales`, `stock`, `img_path` ) value (?,?,?,?,?,?)";
         return update(sql, book.getName(), book.getAuthor(), book.getPrice(), book.getSales(), book.getStock(), book.getImgPath());
     }
@@ -32,6 +34,8 @@ public class BookDaoImpl extends BaseDao implements BookDao {
 
     @Override
     public Book queryBookById(Integer id) {
+        //测试当前线程是否同步
+        System.out.println("BookDaoImpl 当前线程名是:" + Thread.currentThread().getName());
         String sql = "SELECT `id` , `name` , `author` , `price` , `sales` , `stock` , `img_path` img_Path FROM t_book WHERE id = ?";
         return queryForOne(Book.class, sql, id);
     }

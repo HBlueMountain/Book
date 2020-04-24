@@ -6,6 +6,7 @@ import com.book.pojo.OrderItem;
 import com.book.pojo.User;
 import com.book.service.OrderService;
 import com.book.service.impl.OrderServiceImpl;
+import com.book.utils.JDBCUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +41,10 @@ public class OrderServlet extends BaseServlet {
         // 3.判断用户登录
         if (user != null){
             // 生成订单号
-            String orderId = orderService.createOrder(cart, user.getId());
+            String orderId = null;
+
+            orderId = orderService.createOrder(cart, user.getId());
+
             // 4.请求转发到登录页码
             // 5.订单号保存到 session 中
             request.getSession().setAttribute("orderId", orderId);

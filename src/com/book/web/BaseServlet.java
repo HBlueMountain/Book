@@ -21,7 +21,8 @@ public abstract class BaseServlet extends HttpServlet {
             // 调用设置业务方法
             method.invoke(this, request, response);
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

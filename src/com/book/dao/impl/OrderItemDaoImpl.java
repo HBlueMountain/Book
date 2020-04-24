@@ -12,6 +12,8 @@ import java.util.List;
 public class OrderItemDaoImpl extends BaseDao implements OrderItemDao {
     @Override
     public int saveOrderItem(OrderItem orderItem) {
+        //测试当前线程是否同步
+        System.out.println("OrderItemDaoImpl 当前线程名是:" + Thread.currentThread().getName());
         String sql = " INSERT INTO `t_order_item` (`name`,`price`,`total_price`,`count`,`order_id`) VALUES(?,?,?,?,?)";
         return update(sql,orderItem.getName(),orderItem.getPrice(),orderItem.getTotalPrice(),orderItem.getCount(),orderItem.getOrderId());
 

@@ -13,6 +13,8 @@ import java.util.List;
 public class OrderDaoImpl extends BaseDao implements OrderDao {
     @Override
     public int saveOrder(Order order) {
+        //测试当前线程是否同步
+        System.out.println("OrderDaoImpl 当前线程名是:" + Thread.currentThread().getName());
         String sql = "INSERT INTO `t_order`( `order_id`,`create_time`, `total_price`,`status`,`user_id`) VALUES (?,?,?,?,?)";
         return update(sql, order.getOrderId(), order.getCreateTime(), order.getTotalPrice(), order.getStatus(), order.getUserId());
     }
