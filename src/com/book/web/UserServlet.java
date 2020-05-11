@@ -5,6 +5,7 @@ import com.book.service.UserService;
 import com.book.service.impl.UserServiceImpl;
 import com.book.utils.WebUtils;
 import com.google.code.kaptcha.Constants;
+import com.google.gson.Gson;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.jasper.tagplugins.jstl.core.If;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -132,5 +134,26 @@ public class UserServlet extends BaseServlet {
         request.getSession().invalidate(); // 马上销毁
         //2 重定向到登录页面  或  网站首页
         response.sendRedirect(request.getContextPath());
+    }
+
+    /**
+     * ajax请求
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void ajaxExistsUsername(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取请求参数
+        String username = request.getParameter("username");
+        //调用UserService.existsUsername()判断是否可用
+        boolean existsUsername = userService.existsUsername(username);
+        //把要返回的数据保存到map中
+        Map<String, Object> map = new HashMap<>();
+        map.put("existsUsername", existsUsername);
+        // 把map 转换为json字符串
+        Gson gson = new Gson();
+        String json = gson.toJson(map);
+        response.getWriter().write(json);
     }
 }

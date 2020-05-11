@@ -11,6 +11,23 @@ Created by YongXin Xue on 2020/04/15 10:09
     <%@ include file="/pages/common/header.jsp" %>
     <script type="text/javascript">
         $(function () {
+            //给用户名绑定失去焦点事件
+            $("#username").blur(function () {
+                //获取用户名信息
+                var usernameText = this.value;
+                //发ajax请求给服务器验证用户名是否可用
+                $.getJSON(
+                    "${basePath}user",
+                    "action=ajaxExistsUsername&username=" + usernameText,
+                    function (data) {
+                        //收到结果后响应到客户端
+                        if (data.existsUsername){
+                            $("span.errorMsg").text("用户名已存在!");
+                        }else{
+                            $("span.errorMsg").text("用户可以用!");
+                        }
+                    })
+            });
 
             // 给验证码图片绑定单击事件
            $("#codeImg").click(function () {

@@ -6,6 +6,7 @@ import com.book.pojo.CartItems;
 import com.book.service.BookService;
 import com.book.service.impl.BookServiceImpl;
 import com.book.utils.WebUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.Soundbank;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by YongXin Xue on 2020/04/21 21:32
@@ -29,7 +32,7 @@ public class CartServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   /* protected void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("添加商品到购物车!");
         // 1.获取商品编号
         int id = WebUtils.parseInt(request.getParameter("id"), 0);
@@ -52,6 +55,45 @@ public class CartServlet extends BaseServlet {
 
         // 6.跳转到添加商品的页面 注意:[根据请求头跳回添加商品的界面] [重要]
         response.sendRedirect(request.getHeader("referer"));
+    }*/
+
+    /**
+     * 使用Ajax请求将图书添加到购物车
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void ajaxAddItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("添加商品到购物车!");
+        // 1.获取商品编号
+        int id = WebUtils.parseInt(request.getParameter("id"), 0);
+        // 2.通过BookService.queryById(id) : Book 获取图书信息
+        Book book = bookService.queryBookId(id);
+        // 3.把 Book 转换为 CartItem
+        CartItems cartItems = new CartItems(book.getId(), book.getName(), 1, book.getPrice(), book.getPrice());
+        // 4.获取Cart 购物车对象
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        if (cart == null){
+            cart = new Cart();
+           request.getSession().setAttribute("cart", cart);
+        }
+        // 5.调用 cart.addItem(CartItem) 添加商品项
+        cart.addItems(cartItems);
+        System.out.println(cart);
+
+        // 保存到 Session 中, 最后一个添加的商品 [购物车添加首页商品的回显]
+        request.getSession().setAttribute("last_name", cartItems.getName());
+
+        Map<String, Object> map = new HashMap<>();
+        //购物车中商品数量
+        map.put("totalCount", cart.getTotalCount());
+        //最后一个添加的商品
+        map.put("last_name", cartItems.getName());
+        Gson gson = new Gson();
+        String json = gson.toJson(map);
+        response.getWriter().write(json);
+
     }
 
     /**

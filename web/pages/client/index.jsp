@@ -21,8 +21,16 @@ Created by YongXin Xue on 2020/04/15 10:09
             // 给加人购物车按钮 绑定点击事件
             $("button.addItemClass").click(function () {
                  var id = $(this).attr("itemId");
-                 //请求CartServlet 程序中的 addItem 方法
-                location.href ="${ basePath }cart?action=addItem&id=" + id;
+                 // 发Ajax 请求
+                 $.getJSON(
+                     "${basePath}cart",
+                     "action=ajaxAddItem&id=" + id,
+                     function (data) {
+                         // 查询用来显示数量的标签
+                        $("#totalCountSpan").html("您的购物车中有 <span style='color: red;' >" + data.totalCount + "</span> 件商品")
+                        $("#lastNameDiv").html('您刚刚将<span style="color: red">《' + data.last_name + '》</span>加入到了购物车中');
+                     }
+                 )
             });
         })
     </script>
@@ -57,10 +65,15 @@ Created by YongXin Xue on 2020/04/15 10:09
             </form>
         </div>
         <div style="text-align: center">
-            <span>您的购物车中有 <span style="color: red">${sessionScope.cart.totalCount}</span> 件商品</span>
-            <div>
-                您刚刚将<span style="color: red">《${ sessionScope.last_name }》</span>加入到了购物车中
-            </div>
+            <c:if test="${empty sessionScope.cart.items}">
+                <span style="color: red" >您当前购物车为空!!</span>
+            </c:if>
+            <c:if test="${not empty sessionScope.cart.items}">
+                <span id="totalCountSpan" >您的购物车中有 <span style="color: red" >${sessionScope.cart.totalCount}</span> 件商品</span>
+                <div id="lastNameDiv">
+                    您刚刚将<span style="color: red">《${ sessionScope.last_name }》</span>加入到了购物车中
+                </div>
+            </c:if>
         </div>
         <%-- 图书遍历的开始 --%>
         <c:forEach items ="${requestScope.page.items}" var="book">

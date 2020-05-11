@@ -12,6 +12,8 @@ import java.lang.reflect.Method;
  */
 public abstract class BaseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //解决请求响应乱码
+        response.setContentType("text/html; charset=UTF-8 ");
         // 获取业务的鉴别字符串 ==> 就可以知道是什么业务
         String action = request.getParameter("action");
         // 通过反射代码的实现
